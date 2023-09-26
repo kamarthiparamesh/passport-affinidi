@@ -9,6 +9,9 @@ This provider creates Affinidi openid client and registers below 2 routes
 1. The first GET route (default as `/api/affinidi-auth/init`) - which returns the affinidi authorization URL for the user to redirect to Affinidi Login flow
 2. The second POST route (default as `/api/affinidi-auth/complete`) - which processes the response(code, state) from Affinidi and does exchange for ID Token and returns user profile
 
+## Dependency packages
+[express](https://www.npmjs.com/package/express) [passport](https://www.npmjs.com/package/passport) [openid-client](https://www.npmjs.com/package/openid-client) [express-session](https://www.npmjs.com/package/express-session)
+
 ## Install
 
 ```

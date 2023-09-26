@@ -15,6 +15,10 @@
     "identity"
   ],
   "author": "Paramesh Kamarthi <paramesh.k@affinidi.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamarthiparamesh/passport-affinidi.git"
+  },
   "license": "MIT",
   "dependencies": {
     "express-session": "^1.17.3",

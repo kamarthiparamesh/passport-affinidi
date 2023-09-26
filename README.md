@@ -95,34 +95,34 @@ initializeServer();
 1. Initiate the Affinidi flow
 
 ```
-      const res = await fetch(`/api/affinidi-auth/init`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  const res = await fetch(`/api/affinidi-auth/init`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-      const data = await res.json();
-      window.location.href = data.authorizationUrl;
+  const data = await res.json();
+  window.location.href = data.authorizationUrl;
 ```
 
 2. Complete the Affinidi flow from callback url and get user profile/error
 
 ```
-      const code = "ory_ac_cpJavrZRCrcF1OgbOhSCTlaTwjEWCEArHKrUsLDKGnU.Nsfxhk7IGJ9ePGEMtCS3-Vy78-KGpX4QPRWWL8CBiDg" // get from querystring name "code"
-      const state = "YvK_vGNLUYXF96wnd-wHfzZ2klAPu0Y_X5zoHfsXRk4" // get from querystring name "state"
-      const res = await fetch(`/api/affinidi-auth/complete`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code, state }),
-      });
+  const code = "ory_ac_cpJavrZRCrcF1OgbOhSCTlaTwjEWCEArHKrUsLDKGnU.Nsfxhk7IGJ9ePGEMtCS3-Vy78-KGpX4QPRWWL8CBiDg" // get from querystring name "code"
+  const state = "YvK_vGNLUYXF96wnd-wHfzZ2klAPu0Y_X5zoHfsXRk4" // get from querystring name "state"
+  const res = await fetch(`/api/affinidi-auth/complete`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ code, state }),
+  });
 
-      const response = await res.json();
-      if (response.error) {
-        console.log('error', `${response.error}-${response.error_description}`)
-      } else {
-        console.log('success', response.user)
-      }
+  const response = await res.json();
+  if (response.error) {
+    console.log('error', `${response.error}-${response.error_description}`)
+  } else {
+    console.log('success', response.user)
+  }
 ```

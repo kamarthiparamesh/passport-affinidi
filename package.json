@@ -1,0 +1,33 @@
+{
+  "name": "passport-affinidi",
+  "version": "2.0.0",
+  "description": "Affinidi (OAuth 2.0) authentication strategy for Passport.",
+  "main": "./lib",
+  "scripts": {
+    "test": "mocha --require ./test/bootstrap/node --recursive"
+  },
+  "keywords": [
+    "passport",
+    "affinidi",
+    "auth",
+    "authn",
+    "authentication",
+    "identity"
+  ],
+  "author": {
+    "name": "Paramesh Kamarthi",
+    "email": "paramesh.k@affinidi.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express-session": "^1.17.3",
+    "openid-client": "^5.5.0",
+    "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "make-node": "0.4.6"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  }
+}

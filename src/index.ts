@@ -33,7 +33,7 @@ export const affinidiProvider = async (app: any, options: ProviderOptionsType) =
 
   app.use(
     expressSesssion({
-      secret: 'this is session secret',
+      secret: options.id,
       resave: false,
       saveUninitialized: true,
       unset: 'destroy',
@@ -95,4 +95,3 @@ export const affinidiProvider = async (app: any, options: ProviderOptionsType) =
     options.routes?.completeHandler || completeHandler,
   )
 }
-

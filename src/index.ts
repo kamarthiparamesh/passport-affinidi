@@ -36,6 +36,9 @@ export const affinidiProvider = async (app: any, options: ProviderOptionsType) =
       secret: options.id,
       resave: false,
       saveUninitialized: true,
+      cookie: {
+        httpOnly: false,
+      },
       unset: 'destroy',
       ...options.expressSesssion,
     }),

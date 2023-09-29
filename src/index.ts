@@ -1,0 +1,98 @@
+import passport from 'passport'
+import expressSesssion, { SessionOptions } from 'express-session'
+
+import AffinidiStrategy from './strategy'
+import { profileParser } from './profile'
+import { generators } from 'openid-client'
+
+export type ProviderOptionsType = {
+  id: string
+  issuer: string
+  client_id: string
+  client_secret: string
+  redirect_uris: string[]
+  verifyCallback?: any
+  expressSesssion?: SessionOptions
+  onSuccess?: Function
+  onError?: Function
+  routes?: {
+    init?: string
+    initHandler?: Function
+    complete?: string
+    completeHandler?: Function
+  }
+}
+
+export const affinidiProvider = async (app: any, options: ProviderOptionsType) => {
+  const { client, strategy, sessionKey } = await AffinidiStrategy(options)
+
+  passport.use('affinidi-oidc', strategy)
+
+  // app.use(passport.initialize());
+  // app.use(passport.session());
+
+  app.use(
+    expressSesssion({
+      secret: 'this is session secret',
+      resave: false,
+      saveUninitialized: true,
+      unset: 'destroy',
+      ...options.expressSesssion,
+    }),
+  )
+
+  // handles serialization and deserialization of authenticated user
+  // passport.serializeUser(function (user, done) {
+  //     done(null, user);
+  // });
+  // passport.deserializeUser(function (user, done) {
+  //     done(null, user);
+  // });
+
+  const initHandler = (req: any, res: any, next: any) => {
+    const code_verifier = generators.codeVerifier()
+    const params = {
+      code_challenge: generators.codeChallenge(code_verifier),
+      code_challenge_method: 'S256',
+      response_type: 'code',
+      scope: 'openid',
+      state: generators.state(),
+    }
+    req.session[sessionKey] = {
+      state: params.state,
+      response_type: params.response_type,
+      code_verifier,
+    }
+
+    let authorizationUrl = client.authorizationUrl(params)
+    res.send({ authorizationUrl })
+  }
+
+  const completeHandler = (req: any, res: any, next: any) => {
+    passport.authenticate('affinidi-oidc', {}, function (err: any, user: any, info: any) {
+      if (err) {
+        if (options.onError && typeof options.onError === 'function') {
+          options.onError(err)
+        }
+        res.status(400).send({
+          error: err.message,
+          error_description: err.error_description,
+        })
+      } else {
+        const profile = profileParser(user)
+        if (options.onSuccess && typeof options.onSuccess === 'function') {
+          options.onSuccess(user, profile)
+        }
+        res.send({ user: profile })
+      }
+    })(req, res, next)
+  }
+
+  app.get(options.routes?.init || '/api/affinidi-auth/init', options.routes?.initHandler || initHandler)
+
+  app.post(
+    options.routes?.complete || '/api/affinidi-auth/complete',
+    options.routes?.completeHandler || completeHandler,
+  )
+}
+

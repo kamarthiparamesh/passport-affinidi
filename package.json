@@ -1,10 +1,12 @@
 {
   "name": "passport-affinidi",
   "version": "0.0.3",
-  "description": "Affinidi (OAuth 2.0) authentication provider for Passport.",
-  "main": "./lib",
+  "description": "Affinidi (OAuth 2.0) authentication provider using passport and open-connect",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --require ./test/bootstrap/node --recursive"
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords": [
     "passport",
@@ -26,7 +28,21 @@
     "passport": "^0.6.0"
   },
   "devDependencies": {
-    "make-node": "0.4.6"
+    "@types/express-session": "^1.17.8",
+    "@types/passport": "^1.0.13",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-mocha": "^10.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "make-node": "0.4.6",
+    "shx": "^0.3.4",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.3",
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">= 0.4.0"

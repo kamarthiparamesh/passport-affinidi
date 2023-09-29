@@ -37,7 +37,8 @@ export const affinidiProvider = async (app: any, options: ProviderOptionsType) =
       resave: false,
       saveUninitialized: true,
       cookie: {
-        httpOnly: false,
+          secure: process.env.NODE_ENV === 'production', // Crucial
+          maxAge: 1000 * 60 * 60 * 24 * 1, // 30 days
       },
       unset: 'destroy',
       ...options.expressSesssion,

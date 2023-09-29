@@ -11,8 +11,10 @@
   "keywords": [
     "passport",
     "affinidi",
+    "affinidi-login",
+    "affinidi-react-auth",
     "auth",
-    "authn",
+    "openid-connect",
     "authentication",
     "identity"
   ],

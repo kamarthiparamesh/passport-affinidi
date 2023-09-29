@@ -1,55 +1,44 @@
-# Logs
-logs
-*.log
-npm-debug.log*
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Dependency directories
-node_modules/
+# dependencies
+node_modules
+bin
+/.pnp
+.pnp.js
 
-# Optional npm cache directory
-.npm
+# testing
+/coverage
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# next.js
+/.next/
+/out/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# production
+/build
 
-# Coverage directory used by tools like istanbul
-coverage
-*.lcov
-.nyc_output
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Optional eslint cache
-.eslintcache
-
-# Editors
-*.swp
-.idea/
-.vs/
-.vscode/
-.vscode-test
+# misc
 .DS_Store
-.history
-Thumbs.db
-/.project
-
-# build / generate output
-dist
-out
-
-# Output of 'npm pack'
-*.tgz
-
-# dotenv environment variables file
-.env
-.npmrc
-
 *.pem
-!test/unit/helpers/public_key.pem
+.idea
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.env
+db.json
+keys
+
+dist
